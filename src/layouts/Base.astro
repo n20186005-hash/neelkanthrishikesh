@@ -1,0 +1,21 @@
+---
+import '../styles/global.css';
+import Brand from '../components/Brand.astro';
+const { title, description, path='/', image='/images/neelkanth-temple.jpg' } = Astro.props;
+const base = Astro.site;
+const canonical = base ? new URL(path, base).toString() : undefined;
+const ogImage = base ? new URL(image, base).toString() : image;
+---
+<!doctype html><html lang="hi-IN"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/>
+<title>{title}</title><meta name="description" content={description}/>
+{canonical && <link rel="canonical" href={canonical}/>}<meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/>{canonical && <meta property="og:url" content={canonical}/>}<meta property="og:image" content={ogImage}/><meta property="og:locale" content="hi_IN"/>
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml"/><link rel="icon" href="/icons/favicon-32.png" sizes="32x32"/><link rel="icon" href="/icons/favicon-16.png" sizes="16x16"/><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180"/>
+<script is:inline>
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};function loadGA(){if(window.__gaLoaded)return;window.__gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP';document.head.appendChild(s);gtag('js',new Date());gtag('config','G-HXM22WWPKP',{anonymize_ip:true});}try{if(localStorage.getItem('cookie-analytics')==='yes')loadGA()}catch(e){}
+</script>
+</head><body><a class="skip" href="#main">मुख्य सामग्री पर जाएँ</a>
+<header class="sticky top-0 z-40 border-b border-black/5 bg-[#f7f2e8]/92 backdrop-blur"><div class="container flex min-h-18 items-center justify-between gap-6"><Brand compact/><nav class="hidden md:flex gap-5 text-sm font-semibold text-[#3f493f]"><a href="/#इतिहास">इतिहास</a><a href="/#यात्रा">कैसे पहुँचें</a><a href="/#सुविधाएँ">सुविधाएँ</a><a href="/#मानचित्र">मानचित्र</a><a href="/#सवाल">सवाल</a></nav><a href="/#यात्रा" class="rounded-full bg-deep px-4 py-2 text-sm font-bold text-white">यात्रा योजना</a></div></header>
+<main id="main"><slot/></main>
+<footer class="bg-deep py-12 text-[#f4efe5]"><div class="container grid gap-8 md:grid-cols-[1.1fr_.9fr]"><div><Brand/><p class="mt-5 max-w-2xl text-sm text-white/70">यह वेबसाइट एक स्वतंत्र, गैर-लाभकारी पर्यटक सूचना मार्गदर्शिका परियोजना है और किसी सरकारी संस्था या आधिकारिक संगठन से संबद्ध नहीं है।</p><p class="mt-3 text-sm text-white/70">यहाँ दी गई जानकारी पौड़ी गढ़वाल जिला प्रशासन, उत्तराखंड पर्यटन विकास बोर्ड तथा भारत सरकार के पर्यटन मंत्रालय की सार्वजनिक सामग्री से मिलान कर तैयार की गई है; इसमें किसी व्यावसायिक प्रतिष्ठान की अनुशंसा नहीं की जाती।</p><p class="mt-3 text-sm text-white/70">चित्र अधिकार: प्रदर्शित चित्रों का कॉपीराइट/अधिकार मूल फोटोग्राफरों अथवा संबंधित लाइसेंसधारकों के पास है।</p><p class="mt-5 text-sm">© 2026 नीलकंठ महादेव यात्री मार्गदर्शिका। सर्वाधिकार सुरक्षित।</p></div><div class="md:text-right"><p class="text-sm font-bold text-white/60">कानूनी जानकारी</p><div class="mt-4 flex flex-col gap-2 md:items-end"><a href="/privacy/">गोपनीयता नीति</a><a href="/terms/">सेवा की शर्तें</a><a href="/cookies/">कुकी सेटिंग</a></div><p class="mt-6 text-xs text-white/55">महत्वपूर्ण यात्रा निर्णय लेने से पहले संबंधित आधिकारिक स्रोत से ताज़ा जानकारी सत्यापित करें।</p></div></div></footer>
+</body></html>

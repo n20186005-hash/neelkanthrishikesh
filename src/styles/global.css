@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: "Nirmala UI", "Mangal", "Kohinoor Devanagari", system-ui, sans-serif;
+  --color-saffron: #d97706;
+  --color-deep: #16231d;
+  --color-leaf: #315b46;
+  --color-stone: #efe7d8;
+  --color-ink: #20251f;
+}
+html{scroll-behavior:smooth} body{margin:0;background:#f7f2e8;color:#20251f;font-family:var(--font-sans);line-height:1.7}
+::selection{background:#d97706;color:white}.container{width:min(1180px,calc(100% - 2rem));margin:auto}.section{padding:5rem 0}.eyebrow{letter-spacing:.12em;text-transform:uppercase;font-size:.76rem;font-weight:800;color:#b85f05}.card{background:rgba(255,255,255,.76);border:1px solid rgba(49,91,70,.14);border-radius:1.25rem;box-shadow:0 14px 45px rgba(22,35,29,.06)}
+.prose h2{font-size:clamp(1.65rem,3vw,2.4rem);font-weight:800;margin:2.5rem 0 1rem}.prose h3{font-size:1.2rem;font-weight:800;margin:1.7rem 0 .6rem}.prose p,.prose li{color:#465047}.prose ul{padding-left:1.25rem;list-style:disc}.legal a{color:#9a4d06;text-decoration:underline}.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;z-index:99;background:#fff;padding:.75rem 1rem}
