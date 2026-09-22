@@ -3,7 +3,7 @@ import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE = process.env.SITE_URL?.trim() || undefined;
+const SITE = process.env.SITE_URL?.trim() || 'https://neelkanthrishikesh.com';
 
 export default defineConfig({
   site: SITE,

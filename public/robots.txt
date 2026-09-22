@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# आधिकारिक साइटमैप (canonical HTTPS)
+Sitemap: https://neelkanthrishikesh.com/sitemap-index.xml

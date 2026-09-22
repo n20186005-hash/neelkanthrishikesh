@@ -1,0 +1,40 @@
+---
+import { COUNTRY_NAME, SOURCES, STATE_PROVINCE } from '../data/site';
+---
+<section id="स्रोत" class="section bg-[#ede5d6]">
+  <div class="container">
+    <p class="eyebrow">स्रोत व संदर्भ (Sources)</p>
+    <h2 class="mt-3 text-4xl font-black">यह जानकारी किन स्रोतों से मिलान की गई</h2>
+    <p class="mt-3 max-w-3xl text-[#586056]">
+      यह पृष्ठ एक स्वतंत्र, गैर-लाभकारी पर्यटक सूचना मार्गदर्शिका है। नीचे वे सार्वजनिक और
+      आधिकारिक स्रोत दिए गए हैं जिनसे तथ्यों का मिलान किया गया; किसी भी यात्रा निर्णय से पहले
+      इन स्रोतों से ताज़ा जानकारी सत्यापित करना उपयोगी है।
+    </p>
+    <ul class="mt-7 grid gap-4 md:grid-cols-2">
+      {
+        SOURCES.map((source) => (
+          <li class="card p-5">
+            <a
+              class="font-bold text-[#9a4d06] underline decoration-[#d97706]/50 underline-offset-4"
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {source.name}
+            </a>
+            <p class="mt-2 text-sm text-[#596158]">{source.note}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 text-sm text-[#586056]">
+      For official updates and regional tourism information, visit
+      <a
+        class="mx-1 font-semibold text-[#9a4d06] underline underline-offset-4"
+        href={SOURCES[0].url}
+        target="_blank"
+        rel="noopener noreferrer">{COUNTRY_NAME} / {STATE_PROVINCE} Official Tourism Portal</a
+      >.
+    </p>
+  </div>
+</section>

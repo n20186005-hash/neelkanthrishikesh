@@ -1,0 +1,45 @@
+---
+import { CITY_NAME_HI, STATE_PROVINCE_HI } from '../data/site';
+const rows = [
+  { season: 'ग्रीष्म (मार्च–जून)', temp: '15°–35°', road: 'सड़कें सामान्य रूप से सुगम; दोपहर गर्म', crowd: 'मध्यम–अधिक (छुट्टियाँ)', tip: 'सुबह जल्दी दर्शन करें; पानी और टोपी रखें। यह ट्रेक और सड़क यात्रा के लिए सबसे अनुकूल ऋतु है।' },
+  { season: 'मानसून (जुलाई–सितंबर)', temp: '20°–30°', road: 'भूस्खलन/जाम की संभावना; कोहरा', crowd: 'सावन में धार्मिक भीड़ अधिक', tip: 'बारिश का गियर साथ रखें; मौसम चेतावनी पर ध्यान दें। पैदल मार्ग केवल स्थानीय सलाह पर।' },
+  { season: 'शरद (अक्टूबर–नवंबर)', temp: '12°–28°', road: 'सड़कें सबसे साफ़ और सुरक्षित', crowd: 'मध्यम', tip: 'वर्ष का सबसे स्पष्ट मौसम और दृश्यता; फोटोग्राफी व प्रकृति के लिए उत्कृष्ट।' },
+  { season: 'शीत (दिसंबर–फरवरी)', temp: '4°–18°', road: 'सुबह शीतल/कोहरा; ऊँचाई पर कभी-कभी बर्फ़', crowd: 'कम–मध्यम', tip: 'गर्म कपड़े अनिवार्य; सुबह बहुत ठंडी हो सकती है।' }
+];
+---
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">ऋतु अनुसार यात्रा रणनीति</p>
+    <h2 class="mt-3 text-4xl font-black">{CITY_NAME_HI} क्षेत्र की ऋतु-सारणी — कब जाएँ</h2>
+    <p class="mt-3 max-w-3xl text-[#586056]">
+      नीचे क्षेत्रीय जलवायु पैटर्न के आधार पर एक सामान्य मार्गदर्शिका है (ये मौसम विज्ञान की लंबी अवधि की प्रवृत्तियाँ हैं, कोई विशिष्ट वर्ष का रिकॉर्ड नहीं)। वास्तविक स्थिति यात्रा के समय बदल सकती है।
+    </p>
+    <div class="mt-7 overflow-x-auto">
+      <table class="w-full min-w-[680px] border-collapse text-left">
+        <thead>
+          <tr class="bg-deep text-[#f4efe5]">
+            <th class="p-3 text-sm font-bold">ऋतु (महीने)</th>
+            <th class="p-3 text-sm font-bold">तापमान</th>
+            <th class="p-3 text-sm font-bold">सड़क / मौसम</th>
+            <th class="p-3 text-sm font-bold">भीड़</th>
+            <th class="p-3 text-sm font-bold">सुझाव</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr class={i % 2 ? 'bg-white/60' : 'bg-white/30'}>
+              <td class="border-t border-black/5 p-3 text-sm font-bold">{r.season}</td>
+              <td class="border-t border-black/5 p-3 text-sm">{r.temp}</td>
+              <td class="border-t border-black/5 p-3 text-sm">{r.road}</td>
+              <td class="border-t border-black/5 p-3 text-sm">{r.crowd}</td>
+              <td class="border-t border-black/5 p-3 text-sm">{r.tip}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-xs text-[#6b6357]">
+      नोट: यहाँ दी गई तापमान सीमाएँ क्षेत्रीय पर्वतीय जलवायु का सामान्य अनुमान हैं; पहाड़ी स्थानों पर स्थानीय मौसम तेज़ी से बदल सकता है।
+    </p>
+  </div>
+</section>

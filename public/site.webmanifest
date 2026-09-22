@@ -1,0 +1,25 @@
+{
+  "name": "नीलकंठ महादेव मंदिर ऋषिकेश — यात्री मार्गदर्शिका",
+  "short_name": "नीलकंठ मार्गदर्शिका",
+  "description": "श्री नीलकंठ महादेव मंदिर (Shree Neelkanth Mahadev Temple), ऋषिकेश/पौड़ी गढ़वाल, उत्तराखंड — दर्शन समय, यात्रा मार्ग, मानचित्र और FAQ।",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f2e8",
+  "theme_color": "#16231d",
+  "lang": "hi-IN",
+  "dir": "ltr",
+  "categories": ["travel", "reference"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
