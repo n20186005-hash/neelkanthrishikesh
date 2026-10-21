@@ -1,9 +1,9 @@
 /* Service Worker — neelkanthrishikesh.com
  * रणनीति: पृष्ठ (navigation) network-first, स्थिर संपत्तियाँ cache-first, ऑफ़लाइन फॉलबैक।
  */
-const VERSION = 'v1';
-const STATIC_CACHE = `static-${VERSION}`;
-const PAGE_CACHE = `pages-${VERSION}`;
+const VERSION = 'neelkanth-20261020';
+const STATIC_CACHE = `neelkanth-static-${VERSION}`;
+const PAGE_CACHE = `neelkanth-pages-${VERSION}`;
 const OFFLINE_URL = '/offline/';
 
 const PRECACHE = ['/', '/offline/', '/icons/icon-192.png', '/icons/icon-512.png', '/site.webmanifest'];
@@ -20,7 +20,7 @@ self.addEventListener('activate', (event) => {
     caches
       .keys()
       .then((keys) =>
-        Promise.all(keys.filter((k) => k !== STATIC_CACHE && k !== PAGE_CACHE).map((k) => caches.delete(k)))
+        Promise.all(keys.filter((k) => (k.startsWith('neelkanth-static-') || k.startsWith('neelkanth-pages-') || ['static-v1', 'pages-v1'].includes(k)) && k !== STATIC_CACHE && k !== PAGE_CACHE).map((k) => caches.delete(k)))
       )
       .then(() => self.clients.claim())
   );
@@ -30,7 +30,7 @@ async function networkFirst(request) {
   const cache = await caches.open(PAGE_CACHE);
   try {
     const response = await fetch(request);
-    if (response && response.ok) cache.put(request, response.clone());
+    if (response && response.ok && new URL(request.url).pathname !== '/cookies/') cache.put(request, response.clone());
     return response;
   } catch (err) {
     const cached = await cache.match(request);

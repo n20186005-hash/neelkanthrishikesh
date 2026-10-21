@@ -8,18 +8,13 @@ import {
   COUNTRY_CODE_2LETTER,
   COUNTRY_NAME,
   DISTRICT_NAME,
-  GOVT_TOURISM_URL,
   HERO_IMAGE,
   LATITUDE,
   LONGITUDE,
   MAPS_SHARE_URL,
-  MINISTRY_TOURISM_URL,
   NEARBY_LANDMARK_1,
   NEARBY_LANDMARK_2,
-  OPENING_HOURS,
   POSTAL_CODE,
-  RATING_VALUE,
-  REVIEW_COUNT,
   STATE_PROVINCE,
   STREET_ADDRESS,
   TOURIST_TYPE,
@@ -45,7 +40,6 @@ export function attractionSchema(): Record<string, unknown> {
     description: `Comprehensive visitor guide to ${ATTRACTION_FULL_NAME} in ${CITY_NAME}, ${STATE_PROVINCE}, ${COUNTRY_NAME}. ${ATTRACTION_FULL_NAME_HI} — ${ADDRESS_HI}.`,
     url: origin,
     image: [absUrl(HERO_IMAGE)],
-    isAccessibleForFree: true,
     touristType: ['पारिवारिक यात्री', 'तीर्थयात्री', 'प्रकृति/ट्रेकिंग'],
     address: {
       '@type': 'PostalAddress',
@@ -57,26 +51,10 @@ export function attractionSchema(): Record<string, unknown> {
     },
     geo: { '@type': 'GeoCoordinates', latitude: LATITUDE, longitude: LONGITUDE },
     hasMap: MAPS_SHARE_URL,
-    openingHours: OPENING_HOURS,
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        opens: '05:00',
-        closes: '18:00'
-      }
-    ],
-    sameAs: [MAPS_SHARE_URL, GOVT_TOURISM_URL, MINISTRY_TOURISM_URL],
+    sameAs: [MAPS_SHARE_URL],
     containedInPlace: {
       '@type': 'AdministrativeArea',
       name: `${DISTRICT_NAME}, ${STATE_PROVINCE}, ${COUNTRY_NAME}`
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: String(RATING_VALUE),
-      reviewCount: String(REVIEW_COUNT),
-      bestRating: '5',
-      worstRating: '1'
     }
   };
 }
@@ -100,16 +78,7 @@ export function breadcrumbSchema(): Record<string, unknown> {
     '@type': 'BreadcrumbList',
     '@id': absUrl('/#breadcrumb'),
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: SITE_NAME_EN, item: absUrl('/') },
-      { '@type': 'ListItem', position: 2, name: COUNTRY_NAME, item: absUrl('/') },
-      { '@type': 'ListItem', position: 3, name: STATE_PROVINCE, item: absUrl('/') },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: `${DISTRICT_NAME} · ${CITY_NAME}`,
-        item: absUrl('/')
-      },
-      { '@type': 'ListItem', position: 5, name: ATTRACTION_FULL_NAME, item: absUrl('/') }
+      { '@type': 'ListItem', position: 1, name: SITE_NAME_EN, item: absUrl('/') }
     ]
   };
 }
@@ -122,7 +91,7 @@ export function webSiteSchema(): Record<string, unknown> {
     url: absUrl('/'),
     name: SITE_NAME_EN,
     inLanguage: 'hi-IN',
-    publisher: { '@id': absUrl('/#attraction') },
+
     about: { '@id': absUrl('/#attraction') }
   };
 }

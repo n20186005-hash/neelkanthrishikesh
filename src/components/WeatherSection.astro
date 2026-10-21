@@ -9,13 +9,14 @@ const today = w?.days[0];
 <section id="मौसम" class="section bg-[#ede5d6]">
   <div class="container">
     <p class="eyebrow">मौसम व यात्रा की तैयारी</p>
-    <h2 class="mt-3 text-4xl font-black">ऋषिकेश/नीलकंठ क्षेत्र का मौसम — आज और आने वाले दिन</h2>
+    <h2 class="mt-3 text-4xl font-black">नीलकंठ क्षेत्र का मौसम पूर्वानुमान</h2>
+    <p class="mt-4 text-sm">स्रोत: <a class="underline" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>। यह स्थल-पिन के पास का मॉडल पूर्वानुमान है, मंदिर का मापा हुआ मौसम या आधिकारिक चेतावनी नहीं। जानकारी 30 मिनट तक कैश हो सकती है। ऑफलाइन पृष्ठ इससे पुराना हो सकता है; समय-मुहर देखें। पूर्वानुमान यात्रा या सड़क खुलने का प्रमाण नहीं है।</p>
     {
       w && cur && info ? (
         <>
           <div class="mt-8 grid gap-6 lg:grid-cols-[1.05fr_1.95fr]">
             <div class="card p-7">
-              <p class="text-sm text-[#586056]">वर्तमान स्थिति</p>
+              <p class="text-sm text-[#586056]">मॉडल की वर्तमान स्थिति</p>
               <div class="mt-2 flex items-end gap-3">
                 <span class="text-6xl">{info.icon}</span>
                 <span class="text-5xl font-black">{cur.temp}°</span>
@@ -28,12 +29,12 @@ const today = w?.days[0];
                 वर्षा संभावना {today?.precipProb ?? 0}% · पराबैंगनी (UV) {today?.uvMax ?? '—'}
               </p>
               <p class="mt-1 text-xs text-[#6b6357]">
-                {cur.time ? 'अद्यतन: ' + cur.time.slice(11, 16) + ' (भारतीय समय)' : ''}
+                {cur.time ? 'पूर्वानुमान समय: ' + cur.time.replace('T', ' ') + ' (भारतीय समय)' : ''}
               </p>
             </div>
             <div class="card p-7">
               <p class="text-sm text-[#586056]">आने वाले 7 दिन</p>
-              <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+              <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
                 {w.days.map((d) => {
                   const di = wmo(d.code);
                   return (
@@ -56,7 +57,7 @@ const today = w?.days[0];
 
           {advice && advice.risk.length > 0 && (
             <div class="mt-6 rounded-2xl border border-red-300 bg-red-50 p-5">
-              <p class="font-black text-red-800">⚠️ सुरक्षा सावधानी (मौसम के आधार पर)</p>
+              <p class="font-black text-red-800">⚠️ सामान्य सावधानी (पूर्वानुमान से निकली; आधिकारिक चेतावनी नहीं)</p>
               <ul class="mt-2 space-y-1 text-sm text-red-900">
                 {advice.risk.map((r) => <li class="flex gap-2"><span>•</span><span>{r}</span></li>)}
               </ul>

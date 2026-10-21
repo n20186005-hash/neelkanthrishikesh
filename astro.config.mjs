@@ -9,6 +9,6 @@ export default defineConfig({
   site: SITE,
   output: 'server',
   adapter: cloudflare({ platformProxy: { enabled: true } }),
-  integrations: SITE ? [sitemap()] : [],
+  integrations: SITE ? [sitemap({filter: (page) => !/\/(offline|404)\/?$/.test(page)})] : [],
   vite: { plugins: [tailwindcss()] }
 });
