@@ -108,8 +108,18 @@ export async function getWeather(): Promise<WeatherData | null> {
       `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,uv_index_max,sunrise,sunset` +
       `&timezone=Asia%2FKolkata&forecast_days=7&wind_speed_unit=kmh`;
     const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-    if (!res.ok) return cache?.data ?? null;
+    if (!res.ok) return null;
     const j = (await res.json()) as any;
+    const currentKeys = ['temperature_2m','apparent_temperature','relative_humidity_2m','wind_speed_10m','wind_direction_10m','precipitation','weather_code'];
+    const dailyKeys = ['weather_code','temperature_2m_max','temperature_2m_min','precipitation_sum','precipitation_probability_max','uv_index_max'];
+    if (!j || !j.current || !j.daily || !currentKeys.every(k => Number.isFinite(j.current[k])) ||
+        typeof j.current.time !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(j.current.time) ||
+        !Array.isArray(j.daily.time) || j.daily.time.length !== 7 ||
+        !j.daily.time.every((v: unknown) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v)) ||
+        !dailyKeys.every(k => Array.isArray(j.daily[k]) && j.daily[k].length === 7 && j.daily[k].every(Number.isFinite)) ||
+        !['sunrise','sunset'].every(k => Array.isArray(j.daily[k]) && j.daily[k].length === 7 && j.daily[k].every((v: unknown) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(v)))) return null;
+    const currentEpoch = Date.parse(j.current.time + '+05:30');
+    if (!Number.isFinite(currentEpoch) || Math.abs(now - currentEpoch) > 6 * 60 * 60 * 1000) return null;
     const cur = j.current;
     const d = j.daily;
     const days: DayForecast[] = (d.time as string[]).map((date: string, i: number) => ({
@@ -141,7 +151,7 @@ export async function getWeather(): Promise<WeatherData | null> {
     cache = { at: now, data };
     return data;
   } catch {
-    return cache?.data ?? null;
+    return null;
   }
 }
 

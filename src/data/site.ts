@@ -34,10 +34,10 @@ export const POSTAL_CODE = '249304';
 export const PLUS_CODE = '38JR+C7F';
 export const STREET_ADDRESS = '38JR+C7F, Kotdwar - Pauri Rd';
 export const ADDRESS_HI =
-  '38JR+C7F, कोटद्वार–पौड़ी रोड, कोटद्वार, पौड़ी गढ़वाल, उत्तराखंड 249304, भारत';
+  '38JR+C7F, कोटद्वार–पौड़ी रोड, कोटद्वार, उत्तराखंड 249304, भारत';
 
-export const LATITUDE = 30.0811;
-export const LONGITUDE = 78.3411;
+export const LATITUDE = 30.0810736;
+export const LONGITUDE = 78.340675;
 
 export const MAPS_SHARE_URL = 'https://maps.app.goo.gl/CJ2iWSAjTeDeUkWH9';
 export const MAPS_EMBED_SRC =
@@ -47,7 +47,6 @@ export const MAPS_EMBED_SRC =
 export const ALTERNATE_NAMES = [
   ATTRACTION_SHORT_NAME,
   'Neelkanth Rishikesh',
-  'Neelkantheshwar Mahadev Temple',
   'नीलकंठ महादेव मंदिर',
   'श्री नीलकण्ठ महादेव मन्दिर',
   `${CITY_NAME} ${ATTRACTION_FULL_NAME}`
@@ -58,21 +57,20 @@ export const NEARBY_LANDMARK_2 = { name: 'Triveni Ghat, Rishikesh', hi: 'त्�
 
 /** आधिकारिक (.gov/.nic) बाहरी स्रोत */
 export const GOVT_TOURISM_URL = 'https://uttarakhandtourism.gov.in';
-export const DISTRICT_ADMIN_URL = 'https://pauri.nic.in';
+export const DISTRICT_ADMIN_URL = 'https://pauri.nic.in/tourist-place/neelkanth-mahadev-temple/';
 export const MINISTRY_TOURISM_URL = 'https://tourism.gov.in';
 export const COMMONS_IMAGE_URL =
   'https://commons.wikimedia.org/wiki/File:NeelKanth_Mahadev_Temple.JPG';
 
 export const TOURIST_TYPE = 'HinduTemple';
 export const RATING_VALUE = 4.7;
-export const REVIEW_COUNT = 42893;
-export const OPENING_HOURS = 'Mo-Su 05:00-18:00';
+export const REVIEW_COUNT = 43120;
 export const OPENING_HOURS_HI =
   'प्रतिदिन प्रातः 5:00 से सायं 6:00 तक (यात्रा से पहले सत्यापित करें)';
 export const DISTANCE_FROM_RISHIKESH_KM = 32;
 
 export const HERO_IMAGE = '/images/hero.jpg';
-export const HERO_IMAGE_ALT = `${ATTRACTION_FULL_NAME} - Main view in ${CITY_NAME}, ${COUNTRY_NAME}`;
+export const HERO_IMAGE_ALT = 'नीलकंठ महादेव मंदिर के शिखर और प्रवेश का ऐतिहासिक चित्र, 23 मार्च 2010';
 
 export interface Source {
   name: string;
@@ -89,7 +87,7 @@ export const SOURCES: Source[] = [
   {
     name: 'पौड़ी गढ़वाल जिला प्रशासन — Pauri Garhwal District Administration',
     url: DISTRICT_ADMIN_URL,
-    note: 'मंदिर की दूरी, धार्मिक कथा, तीन घाटियाँ, पैदल मार्ग और विश्राम गृह संबंधी विवरण।'
+    note: 'पुराना जिला विवरण (अंतिम अद्यतन 6 अप्रैल 2018): कथा और मार्ग-दूरी का संदर्भ; आज का खुला मार्ग या सेवा उपलब्धता इससे प्रमाणित नहीं होती।'
   },
   {
     name: 'Ministry of Tourism, Government of India — पर्यटन मंत्रालय, भारत सरकार',
@@ -99,7 +97,7 @@ export const SOURCES: Source[] = [
   {
     name: 'Google Maps — Shree Neelkanth Mahadev Temple लिस्टिंग',
     url: MAPS_SHARE_URL,
-    note: 'स्थान, निर्देशांक, सामान्य समय और सार्वजनिक रेटिंग का स्नैपशॉट; ये बदल सकते हैं।'
+    note: '20 अक्टूबर 2026 को जाँची गई तृतीय-पक्ष लिस्टिंग: पता, पिन, 4.7/5 (43,120 समीक्षाएँ) और प्रतिदिन 05:00–18:00। यात्रा/पर्व का समय फिर जाँचें।'
   },
   {
     name: 'Wikimedia Commons — NeelKanth Mahadev Temple.JPG (public domain)',
