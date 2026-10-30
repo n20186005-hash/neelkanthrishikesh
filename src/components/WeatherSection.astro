@@ -1,74 +1,130 @@
 ---
 import { getWeather, wmo, compass, buildAdvice } from '../lib/weather';
+import type { Locale } from '../lib/ui';
+const { locale = 'hi' as Locale } = Astro.props;
 const w = await getWeather();
 const cur = w?.current;
 const info = cur ? wmo(cur.code) : null;
 const advice = w ? buildAdvice(w) : null;
 const today = w?.days[0];
+const dayFmt = new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : 'hi-IN', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+  timeZone: 'Asia/Kolkata'
+});
+
+const L = locale === 'en'
+  ? {
+      id: 'weather',
+      eyebrow: 'Weather & trip prep',
+      h2: 'Neelkanth area weather forecast',
+      src: 'Source: <a class="underline" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>. This is a model forecast near the pin, not measured temple weather or an official warning. Info may be cached up to 30 minutes; the offline page may be older — check the timestamp. The forecast is not proof of travel or road access.',
+      curStatus: 'Model current condition',
+      feels: 'Feels like',
+      wind: 'Wind',
+      kmhr: 'km/hr',
+      precip: 'Precip',
+      uv: 'UV',
+      fcTime: 'Forecast time',
+      ist: 'India time',
+      seven: 'Next 7 days',
+      sun: 'Sunrise/sunset',
+      hillNote: '(India time) · Hill weather changes fast; check fresh info before travel.',
+      riskTitle: '⚠️ General caution (from forecast; not an official warning)',
+      outfit: '👕 What to wear',
+      activity: '🧭 Plan your visit',
+      items: '🎒 Carry with you',
+      fallback: 'Weather information is temporarily unavailable. Hill weather changes often, so check local context before travel.',
+      enNote: 'Hill weather changes quickly. Verify locally before travel; this forecast is not an official warning.'
+    }
+  : {
+      id: 'मौसम',
+      eyebrow: 'मौसम व यात्रा की तैयारी',
+      h2: 'नीलकंठ क्षेत्र का मौसम पूर्वानुमान',
+      src: 'स्रोत: <a class="underline" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>। यह स्थल-पिन के पास का मॉडल पूर्वानुमान है, मंदिर का मापा हुआ मौसम या आधिकारिक चेतावनी नहीं। जानकारी 30 मिनट तक कैश हो सकती है। ऑफलाइन पृष्ठ इससे पुराना हो सकता है; समय-मुहर देखें। पूर्वानुमान यात्रा या सड़क खुलने का प्रमाण नहीं है।',
+      curStatus: 'मॉडल की वर्तमान स्थिति',
+      feels: 'हवा में यह महसूस होगा',
+      wind: 'हवा',
+      kmhr: 'किमी/घंटा',
+      precip: 'वर्षा संभावना',
+      uv: 'पराबैंगनी (UV)',
+      fcTime: 'पूर्वानुमान समय',
+      ist: 'भारतीय समय',
+      seven: 'आने वाले 7 दिन',
+      sun: 'सूर्योदय/अस्त',
+      hillNote: '(भारतीय समय) · पहाड़ी क्षेत्र में मौसम तेज़ी से बदल सकता है; यात्रा से पहले ताज़ा जानकारी देखें।',
+      riskTitle: '⚠️ सामान्य सावधानी (पूर्वानुमान से निकली; आधिकारिक चेतावनी नहीं)',
+      outfit: '👕 यात्रा पहनावा',
+      activity: '🧭 घूमने की योजना',
+      items: '🎒 साथ रखें',
+      fallback: 'इस समय मौसम जानकारी अस्थायी रूप से उपलब्ध नहीं है। पहाड़ी क्षेत्र में मौसम बदलता रहता है, इसलिए यात्रा से पहले स्थानीय संदर्भ देखें।',
+      enNote: 'पहाड़ी मौसम जल्दी बदलता है। यात्रा से पहले स्थानीय जानकारी देखें; यह पूर्वानुमान आधिकारिक चेतावनी नहीं है।'
+    };
 ---
-<section id="मौसम" class="section bg-[#ede5d6]">
+<section id={L.id} class="section bg-[#ede5d6]">
   <div class="container">
-    <p class="eyebrow">मौसम व यात्रा की तैयारी</p>
-    <h2 class="mt-3 text-4xl font-black">नीलकंठ क्षेत्र का मौसम पूर्वानुमान</h2>
-    <p class="mt-4 text-sm">स्रोत: <a class="underline" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>। यह स्थल-पिन के पास का मॉडल पूर्वानुमान है, मंदिर का मापा हुआ मौसम या आधिकारिक चेतावनी नहीं। जानकारी 30 मिनट तक कैश हो सकती है। ऑफलाइन पृष्ठ इससे पुराना हो सकता है; समय-मुहर देखें। पूर्वानुमान यात्रा या सड़क खुलने का प्रमाण नहीं है।</p>
+    <p class="eyebrow">{L.eyebrow}</p>
+    <h2 class="mt-3 text-4xl font-black">{L.h2}</h2>
+    <p class="mt-4 text-sm" set:html={L.src}></p>
     {
       w && cur && info ? (
         <>
           <div class="mt-8 grid gap-6 lg:grid-cols-[1.05fr_1.95fr]">
             <div class="card p-7">
-              <p class="text-sm text-[#586056]">मॉडल की वर्तमान स्थिति</p>
+              <p class="text-sm text-[#586056]">{L.curStatus}</p>
               <div class="mt-2 flex items-end gap-3">
                 <span class="text-6xl">{info.icon}</span>
                 <span class="text-5xl font-black">{cur.temp}°</span>
               </div>
-              <p class="mt-2 text-lg font-bold">{info.hi}</p>
+              <p class="mt-2 text-lg font-bold">{locale === 'en' ? info.en : info.hi}</p>
               <p class="mt-1 text-sm text-[#586056]">
-                हवा में यह महसूस होगा: {cur.apparent}° · हवा {cur.windSpeed} किमी/घंटा ({compass(cur.windDir)})
+                {L.feels}: {cur.apparent}° · {L.wind} {cur.windSpeed} {L.kmhr} ({compass(cur.windDir, locale)})
               </p>
               <p class="mt-1 text-sm text-[#586056]">
-                वर्षा संभावना {today?.precipProb ?? 0}% · पराबैंगनी (UV) {today?.uvMax ?? '—'}
+                {L.precip} {today?.precipProb ?? 0}% · {L.uv} {today?.uvMax ?? '—'}
               </p>
               <p class="mt-1 text-xs text-[#6b6357]">
-                {cur.time ? 'पूर्वानुमान समय: ' + cur.time.replace('T', ' ') + ' (भारतीय समय)' : ''}
+                {cur.time ? `${L.fcTime}: ${cur.time.replace('T', ' ')} (${L.ist})` : ''}
               </p>
             </div>
             <div class="card p-7">
-              <p class="text-sm text-[#586056]">आने वाले 7 दिन</p>
+              <p class="text-sm text-[#586056]">{L.seven}</p>
               <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
                 {w.days.map((d) => {
                   const di = wmo(d.code);
                   return (
                     <div class="rounded-xl border border-black/5 bg-white/70 p-3 text-center">
-                      <p class="text-xs font-bold text-[#7a6a4f]">{d.weekday}</p>
+                      <p class="text-xs font-bold text-[#7a6a4f]">{dayFmt.format(new Date(d.date + 'T00:00:00+05:30'))}</p>
                       <p class="my-1 text-2xl">{di.icon}</p>
                       <p class="text-sm font-black">{d.tMax}°</p>
                       <p class="text-xs text-[#6b6357]">{d.tMin}°</p>
-                      <p class="mt-1 text-[11px] text-[#7a6a4f]">बारिश {d.precipProb}%</p>
+                      <p class="mt-1 text-[11px] text-[#7a6a4f]">rain {d.precipProb}%</p>
                       {d.uvMax > 0 && <p class="text-[11px] text-[#7a6a4f]">UV {d.uvMax}</p>}
                     </div>
                   );
                 })}
               </div>
               <p class="mt-4 text-xs text-[#6b6357]">
-                सूर्योदय/अस्त: {w.days[0]?.sunrise}–{w.days[0]?.sunset} (भारतीय समय) · पहाड़ी क्षेत्र में मौसम तेज़ी से बदल सकता है; यात्रा से पहले ताज़ा जानकारी देखें।
+                {L.sun}: {w.days[0]?.sunrise}–{w.days[0]?.sunset} {L.hillNote}
               </p>
             </div>
           </div>
 
-          {advice && advice.risk.length > 0 && (
+          {locale === 'hi' && advice && advice.risk.length > 0 && (
             <div class="mt-6 rounded-2xl border border-red-300 bg-red-50 p-5">
-              <p class="font-black text-red-800">⚠️ सामान्य सावधानी (पूर्वानुमान से निकली; आधिकारिक चेतावनी नहीं)</p>
+              <p class="font-black text-red-800">{L.riskTitle}</p>
               <ul class="mt-2 space-y-1 text-sm text-red-900">
                 {advice.risk.map((r) => <li class="flex gap-2"><span>•</span><span>{r}</span></li>)}
               </ul>
             </div>
           )}
 
-          {advice && (advice.outfit.length + advice.activity.length + advice.items.length) > 0 && (
+          {locale === 'hi' && advice && (advice.outfit.length + advice.activity.length + advice.items.length) > 0 && (
             <div class="mt-6 grid gap-5 md:grid-cols-3">
               {advice.outfit.length > 0 && (
                 <div class="rounded-2xl border border-black/5 bg-white/80 p-6">
-                  <p class="font-black">👕 यात्रा पहनावा</p>
+                  <p class="font-black">{L.outfit}</p>
                   <ul class="mt-3 space-y-2 text-sm text-[#596158]">
                     {advice.outfit.map((s) => <li class="flex gap-2"><span>✓</span><span>{s}</span></li>)}
                   </ul>
@@ -76,7 +132,7 @@ const today = w?.days[0];
               )}
               {advice.activity.length > 0 && (
                 <div class="rounded-2xl border border-black/5 bg-white/80 p-6">
-                  <p class="font-black">🧭 घूमने की योजना</p>
+                  <p class="font-black">{L.activity}</p>
                   <ul class="mt-3 space-y-2 text-sm text-[#596158]">
                     {advice.activity.map((s) => <li class="flex gap-2"><span>✓</span><span>{s}</span></li>)}
                   </ul>
@@ -84,7 +140,7 @@ const today = w?.days[0];
               )}
               {advice.items.length > 0 && (
                 <div class="rounded-2xl border border-black/5 bg-white/80 p-6">
-                  <p class="font-black">🎒 साथ रखें</p>
+                  <p class="font-black">{L.items}</p>
                   <ul class="mt-3 space-y-2 text-sm text-[#596158]">
                     {advice.items.map((s) => <li class="flex gap-2"><span>✓</span><span>{s}</span></li>)}
                   </ul>
@@ -92,11 +148,13 @@ const today = w?.days[0];
               )}
             </div>
           )}
+
+          {locale === 'en' && (
+            <p class="mt-6 text-sm text-[#586056]">{L.enNote}</p>
+          )}
         </>
       ) : (
-        <div class="mt-8 card p-7 text-sm text-[#586056]">
-          इस समय मौसम जानकारी अस्थायी रूप से उपलब्ध नहीं है। पहाड़ी क्षेत्र में मौसम बदलता रहता है, इसलिए यात्रा से पहले स्थानीय संदर्भ देखें।
-        </div>
+        <div class="mt-8 card p-7 text-sm text-[#586056]">{L.fallback}</div>
       )
     }
   </div>

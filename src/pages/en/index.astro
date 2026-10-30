@@ -1,0 +1,163 @@
+---
+import Base from '../../layouts/Base.astro';
+import WeatherSection from '../../components/WeatherSection.astro';
+import SourcesSection from '../../components/SourcesSection.astro';
+import TopicLinks from '../../components/TopicLinks.astro';
+import { MAPS_SHARE_URL, MAPS_EMBED_SRC, LATITUDE, LONGITUDE, DISTRICT_ADMIN_URL, COMMONS_IMAGE_URL, HERO_IMAGE_ALT_EN } from '../../data/site';
+import { attractionSchema, breadcrumbSchema, faqSchema, webSiteSchema } from '../../lib/schema';
+
+const faq = [
+  { q: 'How far is Neelkanth Mahadev Temple from Rishikesh?', a: 'Older district notes mention 32 km via the Barrage and 22 km via Ram Jhula. These are route references; verify today’s vehicle route and open road locally.' },
+  { q: 'What are the darshan timings?', a: 'On 20 Oct 2026 the Google Maps listing showed Mon–Sun 05:00–18:00. This is a third-party snapshot; re-check aarti, festival and actual entry times with the local management.' },
+  { q: 'Is entry free?', a: 'No current official fee source for general entry was found; check the temple notice. Donations, prasad and private services may be separate.' },
+  { q: 'Where is the temple?', a: 'The Pauri Garhwal district administration lists it as the Nilkanth tirtha near Rishikesh. Google Maps shows the displayed address "38JR+C7F, Kotdwar – Pauri Rd"; use the verified pin (30.0811°N, 78.3407°E) for navigation.' },
+  { q: 'Can seniors or wheelchair users go?', a: 'Stair-free access and assistance are not confirmed; ask about the entry point, slope and help beforehand. Do not assume vehicle access alone means easy entry.' }
+];
+const schemas = [attractionSchema(), breadcrumbSchema(), faqSchema(faq), webSiteSchema()];
+// Localize the machine-readable structured data for the English page
+schemas[0].description = 'Independent visitor guide to Shree Neelkanth Mahadev Temple near Rishikesh, Uttarakhand, India. We are not the temple management or a booking service; verify routes, darshan timings and services locally before travel.';
+schemas[0].touristType = ['Family travellers', 'Pilgrims', 'Nature/trekking'];
+const alternates = [
+  { lang: 'hi-IN', href: '/' },
+  { lang: 'en', href: '/en/' },
+  { lang: 'x-default', href: '/' }
+];
+---
+<Base
+  title="Neelkanth Mahadev Temple, Rishikesh | Darshan & Route Guide"
+  description="Neelkanth Mahadev Temple near Rishikesh — distance, routes and darshan preparation. District-admin distance, dated Maps timings, the verified pin, historical photo, weather and facility limits."
+  path="/en/"
+  locale="en"
+  alternates={alternates}
+>
+  {schemas.map((schema) => <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+
+  <section id="hero" class="section bg-deep text-white">
+    <div class="container grid items-center gap-10 md:grid-cols-[1.15fr_.85fr]">
+      <div>
+        <p class="eyebrow !text-[#ffc477]">Independent Shiva pilgrimage guide · Rishikesh, Uttarakhand</p>
+        <h1 class="mt-4 text-5xl font-black leading-tight">Shree Neelkanth Mahadev Temple – Rishikesh Visitor Guide</h1>
+        <p class="mt-4 text-lg text-white/80">A Shiva tirtha near Rishikesh. Here distance, the verified pin and darshan preparation come together — we are not the temple management or a booking service.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a class="rounded-full bg-saffron px-6 py-3 font-bold text-white" href="#getting-there">Routes &amp; distance</a>
+          <a class="rounded-full border border-white/30 px-6 py-3 font-bold" href={MAPS_SHARE_URL} target="_blank" rel="noopener noreferrer">Open in Maps</a>
+        </div>
+        <dl class="hero-facts mt-8 grid grid-cols-2 gap-5">
+          <div><dt class="text-sm text-white/70">Barrage route</dt><dd class="text-2xl font-bold">about 32 km*</dd></div>
+          <div><dt class="text-sm text-white/70">Ram Jhula route</dt><dd class="text-2xl font-bold">about 22 km*</dd></div>
+          <div><dt class="text-sm text-white/70">Darshan hours</dt><dd class="text-2xl font-bold">05:00–18:00*</dd></div>
+          <div><dt class="text-sm text-white/70">Google rating</dt><dd class="text-2xl font-bold">4.7/5 · 43,178*</dd></div>
+        </dl>
+        <p class="mt-4 text-sm text-white/70">*Distance: older district note; timings: Google Maps, 20 Oct 2026 snapshot. Verify open route and services before travel.</p>
+      </div>
+      <figure>
+        <img src="/images/hero.jpg" alt={HERO_IMAGE_ALT_EN} width="384" height="429" class="mx-auto w-full max-w-[384px] rounded-3xl" fetchpriority="high"/>
+        <figcaption class="mt-4 text-sm text-white/75">Historic photo, 23 March 2010 · <a href={COMMONS_IMAGE_URL} class="underline" target="_blank" rel="noopener noreferrer">Rahuldewangan / Wikimedia Commons</a> · public domain. Today’s appearance may differ.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="introduction" class="section">
+    <div class="container prose max-w-4xl">
+      <p class="eyebrow">Introduction &amp; belief</p>
+      <h2>About Neelkanth Mahadev</h2>
+      <p>Neelkanth Mahadev is a Shiva temple near Rishikesh, in Uttarakhand. The district administration’s introduction mentions the story of Shiva drinking poison during the Samudra Manthan, which turned his throat blue — the origin of the name "Neelkanth" (blue-throated). This is a religious tradition, not a claim of a proven historical event. The same introduction also refers to three nearby valleys.</p>
+      <p>The <a href={DISTRICT_ADMIN_URL} target="_blank" rel="noopener noreferrer" class="underline">district administration’s temple introduction</a> was last updated 6 April 2018. It is used for cultural and older route context, not as proof of today’s services or permissions.</p>
+    </div>
+  </section>
+
+  <section id="history" class="section bg-[#ede5d6]">
+    <div class="container prose max-w-4xl">
+      <p class="eyebrow">History &amp; legend</p>
+      <h2>The Samudra Manthan legend</h2>
+      <p>The popular legend links the site to the churning of the ocean (Samudra Manthan), when Shiva consumed the poison to protect the world, and his throat turned blue. Treat this as living tradition; separate it from verified history.</p>
+    </div>
+  </section>
+
+  <section id="getting-there" class="section">
+    <div class="container">
+      <p class="eyebrow">Distance from Rishikesh</p>
+      <h2 class="mt-3 text-4xl font-black">How to reach: road routes and trek options</h2>
+      <div class="mt-7 grid gap-5 md:grid-cols-2">
+        <article class="card p-6">
+          <h3 class="text-xl font-black">Road: 32 km and 22 km difference</h3>
+          <p class="mt-3">Older district pages give 32 km via the Barrage and 22 km via Ram Jhula from Rishikesh. These are references for different routes. Which road is open for which vehicle today should be matched with local info and a live map.</p>
+          <p class="mt-3">Do not rely on a fixed 1–1.5 hour assumption. Hill roads, stops and queues can increase travel time. Clarify taxi or private-vehicle return, drop-point and fare beforehand.</p>
+        </article>
+        <article class="card p-6">
+          <h3 class="text-xl font-black">Trek: 12 km in older notes</h3>
+          <p class="mt-3">The district page mentions a 12 km forest walking route. Verify current open status and permission separately. Decide after checking your fitness, daylight, water and return plan.</p>
+          <p class="mt-3">In rain, darkness or local closures, do not treat this older description as route advice.</p>
+        </article>
+        <article class="card p-6">
+          <h3 class="text-xl font-black">Rail and air travel</h3>
+          <p class="mt-3">First plan your rail or air travel to the Rishikesh area. Ask the operator about direct reach to the temple, fare and time from the station or airport. Current train, bus or flight schedules are not verified here.</p>
+        </article>
+        <article class="card p-6">
+          <h3 class="text-xl font-black">Bus or shared vehicle</h3>
+          <p class="mt-3">Today’s regular bus or shared-jeep service for the final stretch to Neelkanth is not confirmed. Before departure, ask the local stand about return service, last timing and passenger limits.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="facilities" class="section bg-[#ede5d6]">
+    <div class="container">
+      <p class="eyebrow">What to ask on site</p>
+      <h2 class="mt-3 text-4xl font-black">Darshan, fees and facilities</h2>
+      <p class="mt-4 max-w-3xl">On 20 Oct 2026 Maps showed 05:00–18:00 all week. This is not official confirmation of aarti, last entry, festival arrangement or entry fee. No current official proof of free general entry was found either; special puja, donations and private services may differ.</p>
+      <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          ['Parking & drop-point', 'Ask the local arrangement about today’s capacity, fee and vehicle limits; this site has not confirmed them.'],
+          ['Toilets & water', 'Ask about toilet access and drinking-water availability on site; carry your own water and hygiene supplies.'],
+          ['Food & rest', 'Do not assume food, dharamshala or rest house availability; the older district note’s rest house is not proof of current booking.'],
+          ['Accessibility', 'Stairs, slope, queue and helper needs should be understood first; wheelchair route is not confirmed.'],
+          ['Fuel, cash & network', 'Prepare return transport, required payment and offline map beforehand; no ATM, charging or network is guaranteed here.'],
+          ['Health & emergency plan', 'Carry regular medicine and ask local help points first; do not treat weather forecast as an official safety warning.']
+        ].map(([t, b]) => (
+          <article class="card p-6"><h3 class="font-black">{t}</h3><p class="mt-3 text-sm">{b}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="map" class="section">
+    <div class="container">
+      <p class="eyebrow">The correct pin</p>
+      <h2 class="mt-3 text-4xl font-black">Neelkanth Mahadev Temple address &amp; Google Maps</h2>
+      <p class="mt-4">Maps displayed address: <span lang="en">38JR+C7F, Kotdwar - Pauri Rd, Kotdwar, Uttarakhand 249304, India</span>. The district administration lists the temple as a tirtha near Rishikesh. The address label has not been reinterpreted into a new administrative conclusion; use the pin below for direction.</p>
+      <p class="mt-3">Pin: {LATITUDE}, {LONGITUDE} · Third-party Google Maps rating: 4.7/5, 43,178 reviews (20 Oct 2026). This is not our own rating.</p>
+      <div class="mt-6 overflow-hidden rounded-3xl border border-black/10">
+        <iframe title="Map of Shree Neelkanth Mahadev Temple" src={MAPS_EMBED_SRC} width="100%" height="420" style="border:0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+      </div>
+      <p class="mt-4"><a href={MAPS_SHARE_URL} class="font-bold underline" target="_blank" rel="noopener noreferrer">Open the original Maps listing &amp; directions</a></p>
+    </div>
+  </section>
+
+  <WeatherSection locale="en" />
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Plan with Rishikesh</p>
+      <h2 class="mt-3 text-3xl font-black">Nearby &amp; local food</h2>
+      <p class="mt-4 max-w-3xl">Treat Rishikesh’s ghats or any other site as a separate trip and verify its access, timing and permission. Patna Waterfall and Triveni Ghat are not verified on this page; do not plan them as right next to the temple or easily accessible.</p>
+      <p class="mt-4 max-w-3xl">Keep food and rest in your plan. No specific shop, food availability, hygiene or opening time is certified here.</p>
+    </div>
+  </section>
+
+  <TopicLinks locale="en" />
+
+  <section id="faq" class="section">
+    <div class="container">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="mt-3 text-4xl font-black">Common questions about Neelkanth</h2>
+      <div class="mt-7 grid gap-4 md:grid-cols-2">
+        {faq.map(({ q, a }) => (
+          <details class="card p-5"><summary class="cursor-pointer font-black">{q}</summary><p class="mt-3">{a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SourcesSection locale="en" />
+</Base>

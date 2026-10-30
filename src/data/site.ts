@@ -71,38 +71,51 @@ export const DISTANCE_FROM_RISHIKESH_KM = 32;
 
 export const HERO_IMAGE = '/images/hero.jpg';
 export const HERO_IMAGE_ALT = 'नीलकंठ महादेव मंदिर के शिखर और प्रवेश का ऐतिहासिक चित्र, 23 मार्च 2010';
+export const HERO_IMAGE_ALT_EN = 'Historic photo of the spire and entrance of Shree Neelkanth Mahadev Temple, 23 March 2010';
 
 export interface Source {
   name: string;
+  nameEn: string;
   url: string;
   note: string;
+  noteEn: string;
 }
 
 export const SOURCES: Source[] = [
   {
     name: 'Uttarakhand Tourism Development Board — आधिकारिक राज्य पर्यटन पोर्टल',
+    nameEn: 'Uttarakhand Tourism Development Board — Official State Tourism Portal',
     url: GOVT_TOURISM_URL,
-    note: 'राज्य-स्तरीय पर्यटन मार्ग, ठहराव और सर्किट संबंधी सार्वजनिक सामग्री।'
+    note: 'राज्य-स्तरीय पर्यटन मार्ग, ठहराव और सर्किट संबंधी सार्वजनिक सामग्री।',
+    noteEn: 'Public material on state-level tourism routes, stays and circuits.'
   },
   {
     name: 'पौड़ी गढ़वाल जिला प्रशासन — Pauri Garhwal District Administration',
+    nameEn: 'Pauri Garhwal District Administration',
     url: DISTRICT_ADMIN_URL,
-    note: 'पुराना जिला विवरण (अंतिम अद्यतन 6 अप्रैल 2018): कथा और मार्ग-दूरी का संदर्भ; आज का खुला मार्ग या सेवा उपलब्धता इससे प्रमाणित नहीं होती।'
+    note: 'पुराना जिला विवरण (अंतिम अद्यतन 6 अप्रैल 2018): कथा और मार्ग-दूरी का संदर्भ; आज का खुला मार्ग या सेवा उपलब्धता इससे प्रमाणित नहीं होती।',
+    noteEn: 'Older district description (last updated 6 April 2018): a reference for the story and route distance; it does not certify today’s open route or service availability.'
   },
   {
     name: 'Ministry of Tourism, Government of India — पर्यटन मंत्रालय, भारत सरकार',
+    nameEn: 'Ministry of Tourism, Government of India',
     url: MINISTRY_TOURISM_URL,
-    note: 'राष्ट्रीय स्तर की नीति, तीर्थ/पर्यटन सूचना और आधिकारिक दिशानिर्देश।'
+    note: 'राष्ट्रीय स्तर की नीति, तीर्थ/पर्यटन सूचना और आधिकारिक दिशानिर्देश।',
+    noteEn: 'National-level policy, pilgrimage/tourism information and official guidelines.'
   },
   {
     name: 'Google Maps — Shree Neelkanth Mahadev Temple लिस्टिंग',
+    nameEn: 'Google Maps — Shree Neelkanth Mahadev Temple listing',
     url: MAPS_SHARE_URL,
-    note: '20 अक्टूबर 2026 को जाँची गई तृतीय-पक्ष लिस्टिंग: पता, पिन, 4.7/5 (43,120 समीक्षाएँ) और प्रतिदिन 05:00–18:00। यात्रा/पर्व का समय फिर जाँचें।'
+    note: '20 अक्टूबर 2026 को जाँची गई तृतीय-पक्ष लिस्टिंग: पता, पिन, 4.7/5 (43,120 समीक्षाएँ) और प्रतिदिन 05:00–18:00। यात्रा/पर्व का समय फिर जाँचें।',
+    noteEn: 'Third-party listing checked on 20 October 2026: address, pin, 4.7/5 (43,120 reviews) and daily 05:00–18:00. Re-check the visit or festival timing.'
   },
   {
     name: 'Wikimedia Commons — NeelKanth Mahadev Temple.JPG (public domain)',
+    nameEn: 'Wikimedia Commons — NeelKanth Mahadev Temple.JPG (public domain)',
     url: COMMONS_IMAGE_URL,
-    note: 'मुख्य चित्र का स्रोत; छवि अधिकार मूल फोटोग्राफर/लाइसेंसधारक के पास।'
+    note: 'मुख्य चित्र का स्रोत; छवि अधिकार मूल फोटोग्राफर/लाइसेंसधारक के पास।',
+    noteEn: 'Source of the main image; image rights belong to the original photographer/licence holder.'
   }
 ];
 

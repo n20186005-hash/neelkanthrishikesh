@@ -37,47 +37,50 @@ export interface Advice {
 
 interface WmoInfo {
   hi: string;
+  en: string;
   icon: string;
 }
 
 const WMO: Record<number, WmoInfo> = {
-  0: { hi: 'साफ़ आसमान', icon: '☀️' },
-  1: { hi: 'मुख्यतः साफ़', icon: '🌤️' },
-  2: { hi: 'आंशिक बादल', icon: '⛅' },
-  3: { hi: 'बादल छाए', icon: '☁️' },
-  45: { hi: 'कोहरा', icon: '🌫️' },
-  48: { hi: 'कोहरा (पाला)', icon: '🌫️' },
-  51: { hi: 'हल्की बूंदाबांदी', icon: '🌦️' },
-  53: { hi: 'बूंदाबांदी', icon: '🌦️' },
-  55: { hi: 'तेज़ बूंदाबांदी', icon: '🌧️' },
-  56: { hi: 'बर्फीली बूंदाबांदी', icon: '🌧️' },
-  57: { hi: 'घनी बर्फीली बूंदाबांदी', icon: '🌧️' },
-  61: { hi: 'हल्की बारिश', icon: '🌧️' },
-  63: { hi: 'बारिश', icon: '🌧️' },
-  65: { hi: 'तेज़ बारिश', icon: '🌧️' },
-  66: { hi: 'बर्फीली बारिश', icon: '🌧️' },
-  67: { hi: 'तेज़ बर्फीली बारिश', icon: '🌧️' },
-  71: { hi: 'हल्की बर्फबारी', icon: '❄️' },
-  73: { hi: 'बर्फबारी', icon: '❄️' },
-  75: { hi: 'तेज़ बर्फबारी', icon: '❄️' },
-  77: { hi: 'बर्फ के कण', icon: '❄️' },
-  80: { hi: 'छिटपट बारिश', icon: '🌦️' },
-  81: { hi: 'छिटपट बारिश', icon: '🌧️' },
-  82: { hi: 'तेज़ छिटपट बारिश', icon: '⛈️' },
-  85: { hi: 'हल्की बर्फीली छिटपट', icon: '❄️' },
-  86: { hi: 'बर्फीली छिटपट', icon: '❄️' },
-  95: { hi: 'आंधी-तूफान', icon: '⛈️' },
-  96: { hi: 'ओलावृष्टि', icon: '⛈️' },
-  99: { hi: 'भारी ओलावृष्टि', icon: '⛈️' }
+  0: { hi: 'साफ़ आसमान', en: 'Clear sky', icon: '☀️' },
+  1: { hi: 'मुख्यतः साफ़', en: 'Mainly clear', icon: '🌤️' },
+  2: { hi: 'आंशिक बादल', en: 'Partly cloudy', icon: '⛅' },
+  3: { hi: 'बादल छाए', en: 'Overcast', icon: '☁️' },
+  45: { hi: 'कोहरा', en: 'Fog', icon: '🌫️' },
+  48: { hi: 'कोहरा (पाला)', en: 'Rime fog', icon: '🌫️' },
+  51: { hi: 'हल्की बूंदाबांदी', en: 'Light drizzle', icon: '🌦️' },
+  53: { hi: 'बूंदाबांदी', en: 'Drizzle', icon: '🌦️' },
+  55: { hi: 'तेज़ बूंदाबांदी', en: 'Dense drizzle', icon: '🌧️' },
+  56: { hi: 'बर्फीली बूंदाबांदी', en: 'Freezing drizzle', icon: '🌧️' },
+  57: { hi: 'घनी बर्फीली बूंदाबांदी', en: 'Dense freezing drizzle', icon: '🌧️' },
+  61: { hi: 'हल्की बारिश', en: 'Slight rain', icon: '🌧️' },
+  63: { hi: 'बारिश', en: 'Rain', icon: '🌧️' },
+  65: { hi: 'तेज़ बारिश', en: 'Heavy rain', icon: '🌧️' },
+  66: { hi: 'बर्फीली बारिश', en: 'Freezing rain', icon: '🌧️' },
+  67: { hi: 'तेज़ बर्फीली बारिश', en: 'Heavy freezing rain', icon: '🌧️' },
+  71: { hi: 'हल्की बर्फबारी', en: 'Slight snow', icon: '❄️' },
+  73: { hi: 'बर्फबारी', en: 'Snow', icon: '❄️' },
+  75: { hi: 'तेज़ बर्फबारी', en: 'Heavy snow', icon: '❄️' },
+  77: { hi: 'बर्फ के कण', en: 'Snow grains', icon: '❄️' },
+  80: { hi: 'छिटपट बारिश', en: 'Rain showers', icon: '🌦️' },
+  81: { hi: 'छिटपट बारिश', en: 'Rain showers', icon: '🌧️' },
+  82: { hi: 'तेज़ छिटपट बारिश', en: 'Violent rain showers', icon: '⛈️' },
+  85: { hi: 'हल्की बर्फीली छिटपट', en: 'Snow showers', icon: '❄️' },
+  86: { hi: 'बर्फीली छिटपट', en: 'Heavy snow showers', icon: '❄️' },
+  95: { hi: 'आंधी-तूफान', en: 'Thunderstorm', icon: '⛈️' },
+  96: { hi: 'ओलावृष्टि', en: 'Hail', icon: '⛈️' },
+  99: { hi: 'भारी ओलावृष्टि', en: 'Heavy hail', icon: '⛈️' }
 };
 
 export function wmo(code: number): WmoInfo {
-  return WMO[code] ?? { hi: 'मौसम जानकारी', icon: '🌡️' };
+  return WMO[code] ?? { hi: 'मौसम जानकारी', en: 'Weather info', icon: '🌡️' };
 }
 
-const DIRS = ['उत्तर', 'उत्तर-पूर्व', 'पूर्व', 'दक्षिण-पूर्व', 'दक्षिण', 'दक्षिण-पश्चिम', 'पश्चिम', 'उत्तर-पश्चिम'];
-export function compass(deg: number): string {
-  return DIRS[Math.round(deg / 45) % 8];
+const DIRS_HI = ['उत्तर', 'उत्तर-पूर्व', 'पूर्व', 'दक्षिण-पूर्व', 'दक्षिण', 'दक्षिण-पश्चिम', 'पश्चिम', 'उत्तर-पश्चिम'];
+const DIRS_EN = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+export function compass(deg: number, locale: 'hi' | 'en' = 'hi'): string {
+  const dirs = locale === 'en' ? DIRS_EN : DIRS_HI;
+  return dirs[Math.round(deg / 45) % 8];
 }
 
 // किमी/घंटा → बीफ़ोर्ट पवन स्तर (पवन-स्तर ट्रिगर के लिए)

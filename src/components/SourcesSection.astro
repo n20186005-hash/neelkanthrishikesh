@@ -1,15 +1,28 @@
 ---
 import { COUNTRY_NAME, SOURCES, STATE_PROVINCE } from '../data/site';
+import type { Locale } from '../lib/ui';
+const { locale = 'hi' as Locale } = Astro.props;
+const L = locale === 'en'
+  ? {
+      id: 'sources',
+      eyebrow: 'Sources & references',
+      h2: 'Sources, verification date and their limits',
+      body: 'Verified: 20 October 2026. This is an independent tourist guide. The district page’s own last update is 6 April 2018; it does not certify today’s open route. Public and official sources used to cross-check the facts are listed below; verifying fresh information from these sources before any travel decision is useful.',
+      portalLabel: `${COUNTRY_NAME} / ${STATE_PROVINCE} Official Tourism Portal`
+    }
+  : {
+      id: 'स्रोत',
+      eyebrow: 'स्रोत व संदर्भ (Sources)',
+      h2: 'स्रोत, जाँच की तारीख और उनकी सीमाएँ',
+      body: 'जाँच: 20 अक्टूबर 2026। यह स्वतंत्र पर्यटक मार्गदर्शिका है। जिला पृष्ठ का अपना अंतिम अद्यतन 6 अप्रैल 2018 है; इससे आज का खुला मार्ग प्रमाणित नहीं होता। नीचे सार्वजनिक और आधिकारिक स्रोत दिए गए हैं जिनसे तथ्यों का मिलान किया गया; किसी भी यात्रा निर्णय से पहले इन स्रोतों से ताज़ा जानकारी सत्यापित करना उपयोगी है।',
+      portalLabel: `${COUNTRY_NAME} / ${STATE_PROVINCE} आधिकारिक पर्यटन पोर्टल`
+    };
 ---
-<section id="स्रोत" class="section bg-[#ede5d6]">
+<section id={L.id} class="section bg-[#ede5d6]">
   <div class="container">
-    <p class="eyebrow">स्रोत व संदर्भ (Sources)</p>
-    <h2 class="mt-3 text-4xl font-black">स्रोत, जाँच की तारीख और उनकी सीमाएँ</h2>
-    <p class="mt-3 max-w-3xl text-[#586056]">
-      जाँच: 20 अक्टूबर 2026। यह स्वतंत्र पर्यटक मार्गदर्शिका है। जिला पृष्ठ का अपना अंतिम अद्यतन 6 अप्रैल 2018 है; इससे आज का खुला मार्ग प्रमाणित नहीं होता। नीचे सार्वजनिक और
-      आधिकारिक स्रोत दिए गए हैं जिनसे तथ्यों का मिलान किया गया; किसी भी यात्रा निर्णय से पहले
-      इन स्रोतों से ताज़ा जानकारी सत्यापित करना उपयोगी है।
-    </p>
+    <p class="eyebrow">{L.eyebrow}</p>
+    <h2 class="mt-3 text-4xl font-black">{L.h2}</h2>
+    <p class="mt-3 max-w-3xl text-[#586056]">{L.body}</p>
     <ul class="mt-7 grid gap-4 md:grid-cols-2">
       {
         SOURCES.map((source) => (
@@ -20,9 +33,9 @@ import { COUNTRY_NAME, SOURCES, STATE_PROVINCE } from '../data/site';
               target="_blank"
               rel="noopener noreferrer"
             >
-              {source.name}
+              {locale === 'en' ? source.nameEn : source.name}
             </a>
-            <p class="mt-2 text-sm text-[#596158]">{source.note}</p>
+            <p class="mt-2 text-sm text-[#596158]">{locale === 'en' ? source.noteEn : source.note}</p>
           </li>
         ))
       }
@@ -33,7 +46,7 @@ import { COUNTRY_NAME, SOURCES, STATE_PROVINCE } from '../data/site';
         class="mx-1 font-semibold text-[#9a4d06] underline underline-offset-4"
         href={SOURCES[0].url}
         target="_blank"
-        rel="noopener noreferrer">{COUNTRY_NAME} / {STATE_PROVINCE} Official Tourism Portal</a
+        rel="noopener noreferrer">{L.portalLabel}</a
       >.
     </p>
   </div>

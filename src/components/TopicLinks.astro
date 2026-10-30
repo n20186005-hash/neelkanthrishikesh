@@ -1,0 +1,48 @@
+---
+import { TOPICS, GROUP_LABELS, type GroupKey } from '../data/topics';
+import type { Locale } from '../lib/ui';
+
+type Props = { locale?: Locale };
+const { locale = 'hi' } = Astro.props as Props;
+
+// प्राथमिक 12 विषयों का क्रम (रिपोर्ट के अनुसार)
+const ORDER: GroupKey[] = ['temple', 'transport', 'decision', 'food', 'nearby', 'itinerary'];
+
+const grouped = ORDER.map((g) => ({
+  key: g,
+  label: GROUP_LABELS[locale][g],
+  items: TOPICS.filter((t) => t.group === g)
+})).filter((g) => g.items.length > 0);
+
+const hrefFor = (slug: string) => (locale === 'hi' ? `/${slug}/` : `/en/${slug}/`);
+const labelFor = (t: (typeof TOPICS)[number]) => (locale === 'en' ? t.en.h1 : t.hi.h1);
+---
+<section id={locale === 'en' ? 'guides' : 'मार्गदर्शिका'} class="section bg-[#ede5d6]">
+  <div class="container">
+    <p class="eyebrow">{locale === 'en' ? 'Topic guides' : 'विषय मार्गदर्शिकाएँ'}</p>
+    <h2 class="mt-3 text-4xl font-black">{locale === 'en' ? 'Guides for your Neelkanth visit' : 'नीलकंठ यात्रा के लिए मार्गदर्शिकाएँ'}</h2>
+    <p class="mt-3 max-w-3xl text-[#586056]">
+      {locale === 'en'
+        ? 'Focused pages on darshan, routes, food and itineraries — practical answers before you travel.'
+        : 'दर्शन, मार्ग, भोजन व यात्रा-योजना पर केंद्रित पृष्ठ — यात्रा से पहले व्यावहारिक जवाब।'}
+    </p>
+    <div class="mt-8 grid gap-8 md:grid-cols-2">
+      {
+        grouped.map((g) => (
+          <div>
+            <h3 class="text-lg font-black text-[#315b46]">{g.label}</h3>
+            <ul class="mt-3 grid gap-2">
+              {g.items.map((t) => (
+                <li>
+                  <a class="font-bold text-[#9a4d06] underline decoration-[#d97706]/40 underline-offset-4" href={hrefFor(t.slug)}>
+                    {labelFor(t)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
